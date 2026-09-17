@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Producto - Sistema de Inventario</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Iconos Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- CSS propio -->
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+
+<body>
+
+<!-- ENCABEZADO -->
+<header>
+    <h1 id="titulo">Sistema de Gestión de Inventario</h1>
+    <p>Formulario de Registro de Nuevos Productos</p>
+</header>
+
+<!-- NAVBAR BOOTSTRAP RESPONSIVE -->
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html">
+            <i class="bi bi-box-seam me-2"></i>Inventario
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContenido" aria-controls="navbarContenido" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarContenido">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="index.html">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="productos.html">Consultar productos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active text-warning fw-bold" href="registrar.html">Registrar producto</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- CONTENIDO PRINCIPAL -->
+<main class="container my-4">
+
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-8">
+
+            <div class="card shadow-sm p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h2 class="h4 text-primary mb-0">
+                        <i class="bi bi-plus-circle me-2"></i>Registrar Nuevo Producto
+                    </h2>
+                    <a href="productos.html" class="btn btn-outline-secondary btn-sm">
+                        <i class="bi bi-arrow-left me-1"></i> Ver Inventario
+                    </a>
+                </div>
+
+                <!-- CONTENEDOR DE ALERTAS -->
+                <div id="mensaje"></div>
+
+                <!-- FORMULARIO -->
+                <form id="formProducto" novalidate>
+                    <div class="row g-3">
+
+                        <!-- CÓDIGO -->
+                        <div class="col-md-6 campo">
+                            <label for="codigo" class="form-label fw-bold">Código:</label>
+                            <input type="text" class="form-control" id="codigo" name="codigo" placeholder="Ejemplo: P001" required>
+                        </div>
+
+                        <!-- NOMBRE -->
+                        <div class="col-md-6 campo">
+                            <label for="nombre" class="form-label fw-bold">Nombre del producto:</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ejemplo: Teclado Mecánico" required>
+                        </div>
+
+                        <!-- CATEGORÍA -->
+                        <div class="col-md-6 campo">
+                            <label for="categoria" class="form-label fw-bold">Categoría:</label>
+                            <select class="form-select" id="categoria" name="categoria" required>
+                                <option value="">Seleccione una categoría</option>
+                                <option value="Tecnología">Tecnología</option>
+                                <option value="Papelería">Papelería</option>
+                                <option value="Accesorios">Accesorios</option>
+                                <option value="Otros">Otros</option>
+                            </select>
+                        </div>
+
+                        <!-- PROVEEDOR (RETO INTEGRADOR) -->
+                        <div class="col-md-6 campo">
+                            <label for="proveedor" class="form-label fw-bold">Proveedor:</label>
+                            <input type="text" class="form-control" id="proveedor" name="proveedor" placeholder="Ejemplo: Tecno SAS" required>
+                        </div>
+
+                        <!-- PRECIO -->
+                        <div class="col-md-4 campo">
+                            <label for="precio" class="form-label fw-bold">Precio ($):</label>
+                            <input type="number" class="form-control" id="precio" name="precio" placeholder="Ejemplo: 120000" min="0" step="0.01" required>
+                        </div>
+
+                        <!-- CANTIDAD -->
+                        <div class="col-md-4 campo">
+                            <label for="cantidad" class="form-label fw-bold">Cantidad inicial:</label>
+                            <input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Ejemplo: 10" min="0" required>
+                        </div>
+
+                        <!-- STOCK MÍNIMO (RETO INTEGRADOR) -->
+                        <div class="col-md-4 campo">
+                            <label for="stockMinimo" class="form-label fw-bold">Stock Mínimo:</label>
+                            <input type="number" class="form-control" id="stockMinimo" name="stockMinimo" placeholder="Ejemplo: 5" min="0" required>
+                        </div>
+
+                    </div>
+
+                    <!-- BOTONES -->
+                    <div class="mt-4 pt-2 border-top d-flex gap-2">
+                        <button type="submit" class="btn btn-success px-4" id="btnSubmitForm">
+                            <i class="bi bi-save me-1"></i> Guardar Producto
+                        </button>
+                        <button type="reset" class="btn btn-secondary px-3" id="btnResetForm">
+                            <i class="bi bi-x-circle me-1"></i> Limpiar Formulario
+                        </button>
+                        <a href="productos.html" class="btn btn-outline-primary ms-auto">
+                            <i class="bi bi-table me-1"></i> Ver Productos Registrados
+                        </a>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+    <p class="mb-1 fw-bold">Sistema Web de Inventario</p>
+    <p class="mb-1">Aprendiz: Dahyana Alexandra Bayona León &bull; Ficha: 3233929</p>
+    <p class="mb-0 text-white-50">Tecnólogo en Análisis y Desarrollo de Software (ADSO) - SENA 2026</p>
+</footer>
+
+<!-- JavaScript de Bootstrap 5 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<!-- JavaScript propio -->
+<script src="js/app.js"></script>
+
+</body>
+</html>

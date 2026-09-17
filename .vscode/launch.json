@@ -1,0 +1,12 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Iniciar Sistema Inventario (Spring Boot)",
+            "request": "launch",
+            "mainClass": "sistema_inventario.SistemaInventarioApplication",
+            "projectName": "sistema-inventario"
+        }
+    ]
+}

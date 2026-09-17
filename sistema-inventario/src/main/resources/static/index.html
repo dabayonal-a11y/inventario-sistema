@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Inventario - Inicio</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Iconos Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- CSS propio -->
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+
+<body>
+
+<!-- ENCABEZADO -->
+<header>
+    <h1 id="titulo">Sistema de Gestión de Inventario</h1>
+    <p class="mb-1">Gestión y control de productos</p>
+    <p class="mb-1"><strong>Aprendiz:</strong> Dahyana Alexandra Bayona León &bull; <strong>Ficha:</strong> 3233929</p>
+    <p class="mb-0 text-white-50">Tecnólogo en Análisis y Desarrollo de Software - SENA</p>
+</header>
+
+<!-- NAVBAR BOOTSTRAP RESPONSIVE -->
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html">
+            <i class="bi bi-box-seam me-2"></i>Inventario
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContenido" aria-controls="navbarContenido" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarContenido">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active text-warning fw-bold" href="index.html">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="productos.html">Consultar productos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="registrar.html">Registrar producto</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- CONTENIDO PRINCIPAL -->
+<main class="container my-4">
+
+    <!-- CONTENEDOR DE ALERTAS -->
+    <div id="mensaje" class="mb-3"></div>
+
+    <!-- RESUMEN DEL INVENTARIO (CLASES 4, 5 Y 6) -->
+    <section class="card shadow-sm p-4 mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="h4 text-primary mb-0">
+                <i class="bi bi-speedometer2 me-2"></i>Resumen del Inventario
+            </h2>
+            <a href="productos.html" class="btn btn-outline-primary btn-sm">
+                <i class="bi bi-table me-1"></i> Ir a la Tabla
+            </a>
+        </div>
+
+        <div class="row g-4">
+            <!-- PRODUCTOS -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card h-100 border-primary shadow-sm tarjeta">
+                    <div class="card-body text-center">
+                        <i class="bi bi-boxes fs-1 text-primary mb-2"></i>
+                        <h3 class="card-title h5">Productos</h3>
+                        <p class="display-5 fw-bold text-primary mb-0" id="cardTotalProductos">25</p>
+                        <small class="text-muted">Total en catálogo</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DISPONIBLES -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card h-100 border-success shadow-sm tarjeta">
+                    <div class="card-body text-center">
+                        <i class="bi bi-check-circle fs-1 text-success mb-2"></i>
+                        <h3 class="card-title h5">Disponibles</h3>
+                        <p class="display-5 fw-bold text-success mb-0" id="cardDisponibles">20</p>
+                        <small class="text-muted">Con existencias en stock</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AGOTADOS -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card h-100 border-danger shadow-sm tarjeta">
+                    <div class="card-body text-center">
+                        <i class="bi bi-exclamation-triangle fs-1 text-danger mb-2"></i>
+                        <h3 class="card-title h5">Agotados</h3>
+                        <p class="display-5 fw-bold text-danger mb-0" id="cardAgotados">5</p>
+                        <small class="text-muted">Sin existencias actuales</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ÚLTIMOS PRODUCTOS REGISTRADOS (RETO INTEGRADOR CLASE 5 Y 6) -->
+    <section class="card shadow-sm p-4 mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="h4 text-primary mb-0">
+                <i class="bi bi-clock-history me-2"></i>Últimos Productos Registrados
+            </h2>
+            <a href="registrar.html" class="btn btn-success btn-sm">
+                <i class="bi bi-plus-circle me-1"></i> Nuevo Producto
+            </a>
+        </div>
+
+        <div class="row g-4" id="ultimosProductosContainer">
+            <!-- TARJETA 1: TECLADO -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm border-0 bg-light">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h3 class="card-title h5 text-primary mb-0">TECLADO</h3>
+                            <span class="badge bg-success">Disponible</span>
+                        </div>
+                        <p class="mb-1"><strong>Código:</strong> P001</p>
+                        <p class="mb-1"><strong>Precio:</strong> $120.000</p>
+                        <p class="mb-0"><strong>Stock:</strong> 10 unidades</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TARJETA 2: MOUSE -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm border-0 bg-light">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h3 class="card-title h5 text-primary mb-0">MOUSE</h3>
+                            <span class="badge bg-success">Disponible</span>
+                        </div>
+                        <p class="mb-1"><strong>Código:</strong> P002</p>
+                        <p class="mb-1"><strong>Precio:</strong> $85.000</p>
+                        <p class="mb-0"><strong>Stock:</strong> 5 unidades</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TARJETA 3: MONITOR -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm border-0 bg-light">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h3 class="card-title h5 text-primary mb-0">MONITOR</h3>
+                            <span class="badge bg-success">Disponible</span>
+                        </div>
+                        <p class="mb-1"><strong>Código:</strong> P003</p>
+                        <p class="mb-1"><strong>Precio:</strong> $850.000</p>
+                        <p class="mb-0"><strong>Stock:</strong> 8 unidades</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN BIENVENIDA -->
+    <section class="card shadow-sm p-4 mb-4">
+        <h2 class="h4 text-primary mb-3">
+            <i class="bi bi-info-circle me-2"></i>Bienvenido al Sistema
+        </h2>
+        <div class="row align-items-center g-4">
+            <div class="col-12 col-md-8">
+                <p class="lead">
+                    Esta aplicación web permite registrar, consultar, actualizar y controlar los productos de una empresa de forma eficiente, integrando tecnologías modernas de Frontend y Backend.
+                </p>
+                <p>
+                    El sistema conecta una interfaz intuitiva desarrollada en <strong>HTML5, CSS3, Bootstrap 5 y JavaScript</strong> con un potente servidor backend en <strong>Java Spring Boot y Spring Data JPA</strong>, respaldado por una base de datos relacional <strong>MySQL</strong>.
+                </p>
+                <div class="d-flex gap-2 mt-3">
+                    <a href="productos.html" class="btn btn-primary">
+                        <i class="bi bi-search me-1"></i> Consultar Inventario
+                    </a>
+                    <a href="registrar.html" class="btn btn-outline-success">
+                        <i class="bi bi-plus-lg me-1"></i> Registrar Producto
+                    </a>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 text-center">
+                <img src="img/inventario.jpg" alt="Sistema de Inventario" class="img-fluid rounded shadow-sm" style="max-height: 220px; object-fit: cover;">
+            </div>
+        </div>
+    </section>
+
+    <!-- FUNCIONES Y PROCESO DE USO (CLASE 2) -->
+    <div class="row g-4 mb-4">
+        <div class="col-12 col-md-6">
+            <section class="card shadow-sm p-4 h-100">
+                <h2 class="h5 text-primary mb-3">
+                    <i class="bi bi-gear me-2"></i>Funciones del Sistema
+                </h2>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><i class="bi bi-check2-circle text-success me-2"></i>Registrar productos en la base de datos MySQL</li>
+                    <li class="list-group-item"><i class="bi bi-check2-circle text-success me-2"></i>Consultar y filtrar el inventario en tiempo real</li>
+                    <li class="list-group-item"><i class="bi bi-check2-circle text-success me-2"></i>Actualizar existencias, precios y proveedores</li>
+                    <li class="list-group-item"><i class="bi bi-check2-circle text-success me-2"></i>Eliminar productos con confirmación de seguridad</li>
+                    <li class="list-group-item"><i class="bi bi-check2-circle text-success me-2"></i>Cálculo automático de subtotales y total del inventario</li>
+                </ul>
+            </section>
+        </div>
+        <div class="col-12 col-md-6">
+            <section class="card shadow-sm p-4 h-100">
+                <h2 class="h5 text-primary mb-3">
+                    <i class="bi bi-list-ol me-2"></i>Proceso de Uso
+                </h2>
+                <ol class="list-group list-group-numbered list-group-flush">
+                    <li class="list-group-item">Ingresar al sistema y revisar el resumen del inventario</li>
+                    <li class="list-group-item">Ir a "Registrar producto" y llenar el formulario con validaciones</li>
+                    <li class="list-group-item">Guardar el producto para enviarlo a Spring Boot y MySQL</li>
+                    <li class="list-group-item">Ver el producto reflejado inmediatamente en la tabla de inventario</li>
+                    <li class="list-group-item">Editar existencias o eliminar artículos cuando sea necesario</li>
+                </ol>
+            </section>
+        </div>
+    </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+    <p class="mb-1 fw-bold">Sistema de Inventario</p>
+    <p class="mb-1">Aprendiz: Dahyana Alexandra Bayona León &bull; Ficha: 3233929</p>
+    <p class="mb-0 text-white-50">Tecnólogo en Análisis y Desarrollo de Software (ADSO) - SENA 2026</p>
+</footer>
+
+<!-- JavaScript de Bootstrap 5 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<!-- JavaScript propio -->
+<script src="js/app.js"></script>
+
+</body>
+</html>

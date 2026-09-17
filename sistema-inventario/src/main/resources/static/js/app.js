@@ -4,12 +4,14 @@
  * Desarrollado para ADSO - SENA
  */
 
-// Detectar automáticamente la URL de la API:
-// - Si se ejecuta desde Spring Boot (/static en puerto 8080), usa la ruta relativa "/productos"
-// - Si se ejecuta desde Live Server (puertos 5500, 5501, 3000, etc.) o archivo local, apunta a http://localhost:8080/productos
-const API_URL = (window.location.protocol === "file:" || window.location.port !== "8080")
+// URL de la API:
+// - En producción (Netlify): apunta al backend desplegado en Railway
+// - En desarrollo local (Live Server / archivo): apunta a localhost:8080
+const BACKEND_RAILWAY = "https://inventario-sistema-production-7d49.up.railway.app";
+
+const API_URL = (window.location.hostname === "localhost" || window.location.protocol === "file:")
     ? "http://localhost:8080/productos"
-    : "/productos";
+    : `${BACKEND_RAILWAY}/productos`;
 
 
 // Semilla inicial con los productos de prueba del sistema (para que nunca quede vacío)

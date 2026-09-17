@@ -15,7 +15,12 @@ import sistema_inventario.model.Producto;
 import sistema_inventario.service.ProductoService;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = {
+    "https://sistema-inventario-web.netlify.app",
+    "http://localhost:8080",
+    "http://localhost:5500",
+    "http://127.0.0.1:5500"
+})
 public class ProductoController {
 
     private final ProductoService service;

@@ -33,10 +33,22 @@ console.log("Sistema de Inventario iniciado. Conectando a API:", API_URL);
 // 1. CARGAR PRODUCTOS DESDE LA API REST (GET)
 // ==========================================
 async function cargarProductos() {
+    // Mostrar indicador de carga mientras conecta con Railway
+    const contenedor = document.getElementById("mensaje");
+    if (contenedor) {
+        contenedor.innerHTML = `
+            <div id="bannerCargando" class="alert alert-info d-flex align-items-center gap-2 py-2 mb-3" role="alert">
+                <div class="spinner-border spinner-border-sm text-info" role="status"></div>
+                <span>Conectando con el servidor... (puede tardar unos segundos la primera vez)</span>
+            </div>
+        `;
+    }
+
     try {
         console.log("Consultando API en:", API_URL);
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 2500);
+        // Railway puede tardar hasta 15s en el cold start; usamos 20s de margen
+        const timeoutId = setTimeout(() => controller.abort(), 20000);
 
         const respuesta = await fetch(API_URL, { signal: controller.signal });
         clearTimeout(timeoutId);
@@ -50,8 +62,11 @@ async function cargarProductos() {
         localStorage.setItem("inventario_local", JSON.stringify(productos));
         console.log("PRODUCTOS RECIBIDOS DEL BACKEND:", productos);
 
-        const banner = document.getElementById("bannerModoLocal");
+        // Quitar el banner de carga al conectar exitosamente
+        const banner = document.getElementById("bannerCargando");
         if (banner) banner.remove();
+        const bannerLocal = document.getElementById("bannerModoLocal");
+        if (bannerLocal) bannerLocal.remove();
 
     } catch (error) {
         console.warn("Backend no disponible. Cargando modo local con persistencia:", error);

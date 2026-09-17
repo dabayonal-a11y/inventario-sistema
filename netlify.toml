@@ -1,0 +1,3 @@
+[build]
+  publish = "sistema-inventario/src/main/resources/static"
+  command = "echo 'No build needed'"

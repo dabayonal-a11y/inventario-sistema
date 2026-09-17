@@ -16,6 +16,7 @@ public class Producto {
 
     private String codigo;
     private String nombre;
+    private String marca;
     private String categoria;
     private String proveedor;
     private Double precio;
@@ -27,10 +28,11 @@ public class Producto {
     }
 
     // Constructor completo
-    public Producto(Long id, String codigo, String nombre, String categoria, String proveedor, Double precio, Integer cantidad, Integer stockMinimo) {
+    public Producto(Long id, String codigo, String nombre, String marca, String categoria, String proveedor, Double precio, Integer cantidad, Integer stockMinimo) {
         this.id = id;
         this.codigo = codigo;
         this.nombre = nombre;
+        this.marca = marca;
         this.categoria = categoria;
         this.proveedor = proveedor;
         this.precio = precio;
@@ -63,6 +65,15 @@ public class Producto {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    // Getter y Setter de marca
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
     }
 
     // Getter y Setter de categoria

@@ -27,6 +27,11 @@ public class ProductoService {
         return repository.findById(id);
     }
 
+    // BUSCAR POR NOMBRE (ACTIVIDAD 8)
+    public List<Producto> buscarPorNombre(String nombre) {
+        return repository.findByNombreContainingIgnoreCase(nombre);
+    }
+
     // REGISTRAR
     public Producto guardarProducto(Producto producto) {
         return repository.save(producto);
@@ -44,6 +49,7 @@ public class ProductoService {
 
             existente.setCodigo(producto.getCodigo());
             existente.setNombre(producto.getNombre());
+            existente.setMarca(producto.getMarca());
             existente.setCategoria(producto.getCategoria());
             existente.setProveedor(producto.getProveedor());
             existente.setPrecio(producto.getPrecio());

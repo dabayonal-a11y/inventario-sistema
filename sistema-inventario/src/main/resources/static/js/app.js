@@ -16,11 +16,11 @@ const API_URL = (window.location.hostname === "localhost" || window.location.pro
 
 // Semilla inicial con los productos de prueba del sistema (para que nunca quede vacío)
 const PRODUCTOS_SEMILLA = [
-    { id: 1, codigo: "PROD-001", nombre: "Laptop Dell Inspiron", categoria: "Tecnología", proveedor: "Dell Colombia", precio: 2850000.0, cantidad: 15, stockMinimo: 5 },
-    { id: 2, codigo: "PROD-002", nombre: "Mouse Inalámbrico Logitech", categoria: "Accesorios", proveedor: "Logitech", precio: 65000.0, cantidad: 4, stockMinimo: 10 },
-    { id: 3, codigo: "PROD-003", nombre: "Teclado Mecánico RGB", categoria: "Accesorios", proveedor: "Redragon", precio: 180000.0, cantidad: 0, stockMinimo: 5 },
-    { id: 4, codigo: "PROD-004", nombre: "Monitor 24 Pulgadas IPS", categoria: "Monitores", proveedor: "LG Electronics", precio: 620000.0, cantidad: 20, stockMinimo: 8 },
-    { id: 5, codigo: "PROD-005", nombre: "Impresora Multifuncional", categoria: "Oficina", proveedor: "Epson", precio: 890000.0, cantidad: 8, stockMinimo: 3 }
+    { id: 1, codigo: "PROD-001", nombre: "Laptop Dell Inspiron", marca: "Dell", categoria: "Tecnología", proveedor: "Dell Colombia", precio: 2850000.0, cantidad: 15, stockMinimo: 5 },
+    { id: 2, codigo: "PROD-002", nombre: "Mouse Inalámbrico Logitech", marca: "Logitech", categoria: "Accesorios", proveedor: "Logitech", precio: 65000.0, cantidad: 4, stockMinimo: 10 },
+    { id: 3, codigo: "PROD-003", nombre: "Teclado Mecánico RGB", marca: "Redragon", categoria: "Accesorios", proveedor: "Redragon", precio: 180000.0, cantidad: 0, stockMinimo: 5 },
+    { id: 4, codigo: "PROD-004", nombre: "Monitor 24 Pulgadas IPS", marca: "LG", categoria: "Monitores", proveedor: "LG Electronics", precio: 620000.0, cantidad: 20, stockMinimo: 8 },
+    { id: 5, codigo: "PROD-005", nombre: "Impresora Multifuncional", marca: "Epson", categoria: "Oficina", proveedor: "Epson", precio: 890000.0, cantidad: 8, stockMinimo: 3 }
 ];
 
 let productos = [];
@@ -168,6 +168,7 @@ function mostrarProductos(lista) {
             <td class="fw-bold text-muted">${producto.id || "-"}</td>
             <td><code>${producto.codigo}</code></td>
             <td class="fw-semibold">${producto.nombre}</td>
+            <td><span class="badge bg-secondary-subtle text-secondary-emphasis border">${producto.marca || "Genérica"}</span></td>
             <td><span class="badge bg-light text-dark border">${producto.categoria || "General"}</span></td>
             <td>${producto.proveedor || '<span class="text-muted fst-italic">No registrado</span>'}</td>
             <td>$${precio.toLocaleString("es-CO")}</td>
@@ -287,6 +288,7 @@ if (formulario) {
 
         const codigo = document.getElementById("codigo").value.trim();
         const nombre = document.getElementById("nombre").value.trim();
+        const marca = document.getElementById("marca") ? document.getElementById("marca").value.trim() : "";
         const categoria = document.getElementById("categoria").value;
         const proveedor = document.getElementById("proveedor") ? document.getElementById("proveedor").value.trim() : "";
         const precio = parseFloat(document.getElementById("precio").value);
@@ -302,6 +304,11 @@ if (formulario) {
 
         if (nombre === "") {
             mostrarAlerta("Debe ingresar el nombre del producto.", "warning");
+            return;
+        }
+
+        if (document.getElementById("marca") && marca === "") {
+            mostrarAlerta("Debe ingresar la marca del producto.", "warning");
             return;
         }
 
@@ -337,6 +344,7 @@ if (formulario) {
         const producto = {
             codigo,
             nombre,
+            marca: marca || "Genérica",
             categoria,
             proveedor: proveedor || "No registrado",
             precio,
@@ -458,6 +466,9 @@ function abrirEdicion(id) {
         document.getElementById("editModalId").value = producto.id;
         document.getElementById("editModalCodigo").value = producto.codigo;
         document.getElementById("editModalNombre").value = producto.nombre;
+        if (document.getElementById("editModalMarca")) {
+            document.getElementById("editModalMarca").value = producto.marca || "";
+        }
         document.getElementById("editModalCategoria").value = producto.categoria || "";
         document.getElementById("editModalProveedor").value = producto.proveedor || "";
         document.getElementById("editModalPrecio").value = producto.precio;
@@ -474,6 +485,9 @@ function abrirEdicion(id) {
         productoEditandoId = producto.id;
         document.getElementById("codigo").value = producto.codigo;
         document.getElementById("nombre").value = producto.nombre;
+        if (document.getElementById("marca")) {
+            document.getElementById("marca").value = producto.marca || "";
+        }
         document.getElementById("categoria").value = producto.categoria;
         if (document.getElementById("proveedor")) {
             document.getElementById("proveedor").value = producto.proveedor || "";
@@ -501,6 +515,7 @@ if (formEditarModal) {
         const id = document.getElementById("editModalId").value;
         const codigo = document.getElementById("editModalCodigo").value.trim();
         const nombre = document.getElementById("editModalNombre").value.trim();
+        const marca = document.getElementById("editModalMarca") ? document.getElementById("editModalMarca").value.trim() : "";
         const categoria = document.getElementById("editModalCategoria").value;
         const proveedor = document.getElementById("editModalProveedor").value.trim();
         const precio = parseFloat(document.getElementById("editModalPrecio").value);
@@ -516,6 +531,7 @@ if (formEditarModal) {
             id: Number(id),
             codigo,
             nombre,
+            marca: marca || "Genérica",
             categoria,
             proveedor: proveedor || "No registrado",
             precio,
@@ -612,22 +628,44 @@ async function eliminarProducto(id) {
 }
 
 // ==========================================
-// 6. BUSCADOR / FILTRO EN TIEMPO REAL
+// 6. BUSCADOR / FILTRO EN TIEMPO REAL (ACTIVIDADES 8 Y 9)
 // ==========================================
 const buscador = document.getElementById("buscadorProductos");
 if (buscador) {
+    let debounceTimer;
     buscador.addEventListener("input", function() {
         const termino = this.value.toLowerCase().trim();
         if (termino === "") {
             mostrarProductos(productos);
-        } else {
-            const filtrados = productos.filter(p => 
-                (p.codigo && p.codigo.toLowerCase().includes(termino)) ||
-                (p.nombre && p.nombre.toLowerCase().includes(termino)) ||
-                (p.categoria && p.categoria.toLowerCase().includes(termino)) ||
-                (p.proveedor && p.proveedor.toLowerCase().includes(termino))
-            );
-            mostrarProductos(filtrados);
+            return;
+        }
+
+        // Filtro inmediato en el cliente por nombre, marca, código, categoría o proveedor
+        const filtrados = productos.filter(p => 
+            (p.nombre && p.nombre.toLowerCase().includes(termino)) ||
+            (p.marca && p.marca.toLowerCase().includes(termino)) ||
+            (p.codigo && p.codigo.toLowerCase().includes(termino)) ||
+            (p.categoria && p.categoria.toLowerCase().includes(termino)) ||
+            (p.proveedor && p.proveedor.toLowerCase().includes(termino))
+        );
+        mostrarProductos(filtrados);
+
+        // Si estamos conectados al backend, opcionalmente consultar endpoint /productos/buscar/{nombre}
+        if (!esModoLocal && termino.length >= 2) {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(async () => {
+                try {
+                    const res = await fetch(`${API_URL}/buscar/${encodeURIComponent(termino)}`);
+                    if (res.ok) {
+                        const encontrados = await res.json();
+                        if (encontrados && encontrados.length > 0) {
+                            mostrarProductos(encontrados);
+                        }
+                    }
+                } catch (e) {
+                    console.log("Búsqueda backend fallback a local:", e);
+                }
+            }, 300);
         }
     });
 }

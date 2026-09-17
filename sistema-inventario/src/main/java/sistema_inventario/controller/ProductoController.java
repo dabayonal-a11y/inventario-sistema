@@ -41,6 +41,12 @@ public class ProductoController {
         return service.buscarPorId(id).orElse(null);
     }
 
+    // GET - BUSCAR POR NOMBRE (ACTIVIDAD 8)
+    @GetMapping("/productos/buscar/{nombre}")
+    public List<Producto> buscarPorNombre(@PathVariable String nombre) {
+        return service.buscarPorNombre(nombre);
+    }
+
     // POST - REGISTRAR
     @PostMapping("/productos")
     public Producto guardarProducto(

@@ -22,11 +22,11 @@ public class SistemaInventarioApplication {
 
             if (repository.count() == 0) {
                 System.out.println("Cargando productos iniciales de prueba...");
-                repository.save(new Producto(null, "PROD-001", "Laptop Dell Inspiron", "Tecnología", "Dell Colombia", 2850000.0, 15, 5));
-                repository.save(new Producto(null, "PROD-002", "Mouse Inalámbrico Logitech", "Accesorios", "Logitech", 65000.0, 4, 10));
-                repository.save(new Producto(null, "PROD-003", "Teclado Mecánico RGB", "Accesorios", "Redragon", 180000.0, 0, 5));
-                repository.save(new Producto(null, "PROD-004", "Monitor 24 Pulgadas IPS", "Monitores", "LG Electronics", 620000.0, 20, 8));
-                repository.save(new Producto(null, "PROD-005", "Impresora Multifuncional", "Oficina", "Epson", 890000.0, 8, 3));
+                repository.save(new Producto(null, "PROD-001", "Laptop Dell Inspiron", "Dell", "Tecnología", "Dell Colombia", 2850000.0, 15, 5));
+                repository.save(new Producto(null, "PROD-002", "Mouse Inalámbrico Logitech", "Logitech", "Accesorios", "Logitech", 65000.0, 4, 10));
+                repository.save(new Producto(null, "PROD-003", "Teclado Mecánico RGB", "Redragon", "Accesorios", "Redragon", 180000.0, 0, 5));
+                repository.save(new Producto(null, "PROD-004", "Monitor 24 Pulgadas IPS", "LG", "Monitores", "LG Electronics", 620000.0, 20, 8));
+                repository.save(new Producto(null, "PROD-005", "Impresora Multifuncional", "Epson", "Oficina", "Epson", 890000.0, 8, 3));
             }
 
             System.out.println("PRODUCTOS REGISTRADOS:");
